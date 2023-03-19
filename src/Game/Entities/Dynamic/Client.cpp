@@ -1,32 +1,41 @@
 #include "Client.h"
 
-Client::Client(int x, int y, int width, int height, ofImage sprite, Burger* burger): Entity(x, y, width, height, sprite){
+Client::Client(int x, int y, int width, int height, ofImage sprite, Burger *burger) : Entity(x, y, width, height, sprite)
+{
     this->burger = burger;
 }
-Client::~Client(){
+Client::~Client()
+{
     delete burger;
 }
-void Client::render(){
+void Client::render()
+{
+    ofSetColor(255,255,255);
     burger->render();
-    ofSetColor (255,255,255);
+    ofSetColor(255, 255 * (patience / originalPatience), 255 * (patience / originalPatience));
     sprite.draw(x, y, width, height);
-    if(nextClient != nullptr){
+    if (nextClient != nullptr)
+    {
         nextClient->render();
     }
 }
 
-void Client::tick(){
+void Client::tick()
+{
     patience--;
     burger->setY(y);
-    if(patience == 0){
+    if (patience == 0)
+    {
         isLeaving = true;
     }
-    if(nextClient != nullptr){
+    if (nextClient != nullptr)
+    {
         nextClient->tick();
     }
 }
 
-int Client::serve(Burger* burger){
+int Client::serve(Burger *burger)
+{
     isLeaving = true;
     return 10;
 }
