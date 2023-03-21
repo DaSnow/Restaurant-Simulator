@@ -1,26 +1,43 @@
 #include "GameState.h"
 
-GameState::GameState() {
-    this->restaurant = new Restaurant();
+GameState::GameState()
+{
+	this->restaurant = new Restaurant();
 }
-void GameState::tick() {
+void GameState::tick()
+{
 	restaurant->tick();
+	if (restaurant->win)
+	{
+		setFinished(true);
+		setNextState("Win");
+	}
+	if (restaurant->lose)
+	{
+		setFinished(true);
+		setNextState("Lose");
+	}
 }
-void GameState::render() {
+void GameState::render()
+{
 	restaurant->render();
 }
 
-void GameState::keyPressed(int key){
+void GameState::keyPressed(int key)
+{
 	restaurant->keyPressed(key);
 }
 
-void GameState::mousePressed(int x, int y, int button){
+void GameState::mousePressed(int x, int y, int button)
+{
 }
 
-void GameState::keyReleased(int key){
+void GameState::keyReleased(int key)
+{
 }
 
-void GameState::reset(){
+void GameState::reset()
+{
 	setFinished(false);
 	setNextState("");
 }

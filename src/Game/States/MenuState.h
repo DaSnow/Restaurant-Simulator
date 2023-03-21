@@ -3,7 +3,8 @@
 #include "State.h"
 #include "Button.h"
 
-class MenuState : public State {
+class MenuState : public State
+{
 private:
 	ofImage img1;
 	Button *startButton;
