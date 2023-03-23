@@ -7,13 +7,13 @@
 #include "Item.h"
 #include "Entity.h"
 
-class BaseCounter: public Entity {
-    private:
-        Item *item;
+class BaseCounter : public Entity
+{
+private:
+    Item *item;
 
-    public:
-        BaseCounter(int x, int y, int width, int height, Item* item, ofImage sprite);
-        Item* getItem();
-        void showItem();
-
+public:
+    BaseCounter(int x, int y, int width, int height, Item *item, ofImage sprite);
+    Item *getItem();
+    void showItem();
 };

@@ -117,7 +117,7 @@ void Restaurant::render()
 }
 void Restaurant::serveClient()
 {
-    if (entityManager->firstClient != nullptr)
+    if (entityManager->firstClient != nullptr && player->burger->equals(entityManager->firstClient->burger))
     {
         money += entityManager->firstClient->serve(player->getBurger());
         if (money == 100)
@@ -132,5 +132,9 @@ void Restaurant::keyPressed(int key)
     if (key == 's')
     {
         serveClient();
+    }
+    if (key == 'u')
+    {
+        player->burger->removeIngredient();
     }
 }
