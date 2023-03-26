@@ -2,7 +2,6 @@
 
 Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManager *em) : Entity(x, y, width, height, sprite)
 {
-
     vector<ofImage> chefAnimframes;
     ofImage temp;
     this->burger = new Burger(ofGetWidth() - 110, 100, 100, 50);
@@ -30,11 +29,11 @@ void Player::tick()
     }
     if (x <= 0)
     {
-        facing = "right";
+        x = 0;
     }
     else if (x + width >= ofGetWidth())
     {
-        facing = "left";
+        x = ofGetWidth() - width;
     }
 }
 
@@ -69,6 +68,16 @@ void Player::keyPressed(int key)
             }
         }
     }
+    if (key == OF_KEY_RIGHT)
+    {
+        speed = 5;
+        facing = "right";
+    }
+    if (key == OF_KEY_LEFT)
+    {
+        speed = 5;
+        facing = "left";
+    }
 }
 BaseCounter *Player::getActiveCounter()
 {
@@ -85,6 +94,14 @@ BaseCounter *Player::getActiveCounter()
 
 void Player::keyReleased(int key)
 {
+    if (key == OF_KEY_RIGHT)
+    {
+        speed = 0;
+    }
+    if (key == OF_KEY_LEFT)
+    {
+        speed = 0;
+    }
 }
 void Player::mousePressed(int x, int y, int button)
 {

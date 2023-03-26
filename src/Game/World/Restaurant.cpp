@@ -138,3 +138,7 @@ void Restaurant::keyPressed(int key)
         player->burger->removeIngredient();
     }
 }
+void Restaurant::keyReleased(int key)
+{
+    player->keyReleased(key);
+}

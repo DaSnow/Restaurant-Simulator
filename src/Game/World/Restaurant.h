@@ -11,13 +11,13 @@
 class Restaurant
 {
 private:
-    Player *player;
     EntityManager *entityManager;
     int ticks = 0;
     std::vector<ofImage> people;
     int money = 0;
 
 public:
+    Player *player;
     bool win = false;
     bool lose = false;
     Restaurant();
@@ -38,4 +38,5 @@ public:
     void tick();
     void render();
     void keyPressed(int key);
+    void keyReleased(int key);
 };
