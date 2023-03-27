@@ -68,6 +68,10 @@ void Player::keyPressed(int key)
             }
         }
     }
+    if (key == 'u')
+    {
+        burger->removeIngredient();
+    }
     if (key == OF_KEY_RIGHT)
     {
         speed = 5;

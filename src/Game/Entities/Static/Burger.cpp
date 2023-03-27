@@ -73,5 +73,5 @@ void Burger::removeIngredient()
 void Burger::trashBurger()
 {
     ingredients.clear();
-    chosenIngredients.clear();   
+    chosenIngredients.clear();
 }
