@@ -10,7 +10,7 @@ Client::~Client()
 }
 void Client::render()
 {
-    ofSetColor(255,255,255);
+    ofSetColor(255, 255, 255);
     burger->render();
     ofSetColor(255, 255 * (patience / originalPatience), 255 * (patience / originalPatience));
     sprite.draw(x, y, width, height);
@@ -34,13 +34,23 @@ void Client::tick()
     }
 }
 
+int Client::payment()
+{
+    int cheese = this->burger->chosenIngredients["cheese"] * 3;
+    int tomato = this->burger->chosenIngredients["tomato"] * 2;
+    int lettuce = this->burger->chosenIngredients["lettuce"] * 2;
+    int patty = this->burger->chosenIngredients["patty"] * 4;
+    int money = 2 + cheese + tomato + lettuce + patty;
+    return money;
+}
+
 int Client::serve(Burger *burger)
 {
     int money = 0;
     if (this->burger->equals(burger))
     {
         this->isLeaving = true;
-        money = 10;
+        money = this->payment();
     }
     else if (nextClient != nullptr)
         money = nextClient->serve(burger);

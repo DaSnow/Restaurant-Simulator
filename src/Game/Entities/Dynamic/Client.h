@@ -14,6 +14,7 @@ public:
     void tick();
     void render();
     int serve(Burger *);
+    int payment();
     Client *nextClient = nullptr;
     bool isLeaving = false;
 };
