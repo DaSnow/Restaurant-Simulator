@@ -36,6 +36,13 @@ void Client::tick()
 
 int Client::serve(Burger *burger)
 {
-    isLeaving = true;
-    return 10;
+    int money = 0;
+    if (this->burger->equals(burger))
+    {
+        this->isLeaving = true;
+        money = 10;
+    }
+    else if (nextClient != nullptr)
+        money = nextClient->serve(burger);
+    return money;
 }

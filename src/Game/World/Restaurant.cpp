@@ -117,21 +117,20 @@ void Restaurant::render()
 }
 void Restaurant::serveClient()
 {
-    if (entityManager->firstClient != nullptr && player->burger->equals(entityManager->firstClient->burger))
+    int currentCash = money;
+    money += entityManager->firstClient->serve(player->getBurger());
+    if (money == 100)
     {
-        money += entityManager->firstClient->serve(player->getBurger());
-        if (money == 100)
-        {
-            win = true;
-        }
+        win = true;
     }
 }
 void Restaurant::keyPressed(int key)
 {
     player->keyPressed(key);
-    if (key == 's')
+    if (key == 's' && player->burger->ingredients.size() > 0)
     {
         serveClient();
+        player->burger->trashBurger(); // Throws out burger
     }
     if (key == 'u')
     {
