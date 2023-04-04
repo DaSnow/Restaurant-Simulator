@@ -9,10 +9,12 @@ void Restaurant::setPlayer(Player *player) { this->player = player; }
 
 Restaurant::Restaurant()
 {
-    floor.load("images/floor.jpg");
+    floor.load("images/Wood.jpg");
     entityManager = new EntityManager();
     ofImage chefPlayerImage;
-    chefPlayerImage.load("images/chef.png");
+    ofImage seats; 
+    seats.load("seatss.png");
+    chefPlayerImage.load("images/spongebob.png");
     this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager);
     initItems();
     initCounters();
