@@ -15,6 +15,7 @@ private:
     int ticks = 0;
     std::vector<ofImage> people;
     int money = 0;
+    std::vector<ofImage> eatingg;
 
 public:
     Player *player;
@@ -29,7 +30,9 @@ public:
     Item *burger;
     Item *botBread;
     Item *topBread;
-    ofImage floor;
+
+    std::vector<Item *> RandomItem;
+    ofImage floor, seats, eating, boat, jellyFish;
     void initItems();
     void initCounters();
     void initClients();

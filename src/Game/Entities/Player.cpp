@@ -5,19 +5,30 @@ Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManage
     vector<ofImage> chefAnimframes;
     ofImage temp;
     this->burger = new Burger(ofGetWidth() - 110, 100, 100, 50);
-    temp.cropFrom(sprite, 30, 3, 66, 120);
+    // temp.cropFrom(sprite, 30, 3, 66, 120);
+    // chefAnimframes.push_back(temp);
+    // temp.cropFrom(sprite, 159, 3, 66, 120);
+    // chefAnimframes.push_back(temp);
+    // temp.cropFrom(sprite, 287, 3, 67, 120);
+    // chefAnimframes.push_back(temp);
+    // temp.cropFrom(sprite, 31, 129, 66, 120);
+    // chefAnimframes.push_back(temp);
+
+    temp.cropFrom(sprite, 0, 0, 33, 42);
     chefAnimframes.push_back(temp);
-    temp.cropFrom(sprite, 159, 3, 66, 120);
+    temp.cropFrom(sprite, 35, 0, 33, 42);
     chefAnimframes.push_back(temp);
-    temp.cropFrom(sprite, 287, 3, 67, 120);
+    temp.cropFrom(sprite, 70, 0, 33, 42);
     chefAnimframes.push_back(temp);
-    temp.cropFrom(sprite, 31, 129, 66, 120);
+    temp.cropFrom(sprite, 109, 0, 33, 42);
     chefAnimframes.push_back(temp);
+
     this->chefAnim = new Animation(50, chefAnimframes);
     this->entityManager = em;
 }
 void Player::tick()
 {
+
     chefAnim->tick();
     if (facing == "left")
     {

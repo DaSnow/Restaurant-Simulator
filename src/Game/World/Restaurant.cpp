@@ -12,9 +12,34 @@ Restaurant::Restaurant()
     floor.load("images/Wood.jpg");
     entityManager = new EntityManager();
     ofImage chefPlayerImage;
-    ofImage seats; 
-    seats.load("seatss.png");
-    chefPlayerImage.load("images/spongebob.png");
+    seats.load("images/seatsss.png");
+    seats.resize(150, 100);
+
+    eating.load("images/seat_with_people.png");
+    eating.resize(150, 200);
+    eatingg.push_back(eating);
+
+    // eating.load("images/eating_gif/2.png");
+    // eating.resize(150, 200);
+    // eatingg.push_back(eating);
+
+    // eating.load("images/eating_gif/3.png");
+    // eating.resize(150, 200);
+    // eatingg.push_back(eating);
+
+    // eating.load("images/eating_gif/4.png");
+    // eating.resize(150, 200);
+    // eatingg.push_back(eating);
+
+    // eating.load("images/eating_gif/5.png");
+    // eating.resize(150, 200);
+    // eatingg.push_back(eating);
+
+    boat.load("images/boat.png");
+    boat.resize(150, 125);
+    jellyFish.load("images/jellyFish.png");
+    jellyFish.resize(65, 70);
+    chefPlayerImage.load("images/moving.PNG");
     this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager);
     initItems();
     initCounters();
@@ -34,9 +59,17 @@ void Restaurant::initItems()
     plateImg.cropFrom(burgerSpriteSheet, 575, 263, 131, 51);    // plate
 
     cheese = new Item(cheeseImg, "cheese");
+    RandomItem.push_back(cheese);
+
     lettuce = new Item(lettuceImg, "lettuce");
+    RandomItem.push_back(lettuce);
+
     tomato = new Item(tomatoImg, "tomato");
+    RandomItem.push_back(tomato);
+
     burger = new Item(burgerImg, "patty");
+    RandomItem.push_back(burger);
+    
     botBread = new Item(botBreadImg, "bottomBun");
     topBread = new Item(topBreadImg, "topBun");
 }
@@ -88,6 +121,7 @@ void Restaurant::tick()
     if (ticks % 400 == 0)
     {
         generateClient();
+        //eatingg->tick();
     }
     player->tick();
     entityManager->tick();
@@ -99,21 +133,45 @@ void Restaurant::tick()
 
 void Restaurant::generateClient()
 {
+    
+
     Burger *b = new Burger(72, 100, 50, 25);
     b->addIngredient(botBread);
-    b->addIngredient(burger);
-    b->addIngredient(cheese);
-    b->addIngredient(tomato);
-    b->addIngredient(lettuce);
+
+    int limit = ofRandom(1, 4);
+    Item *randIngre;
+    for(int i = 0; i < limit; i++){
+        randIngre = RandomItem[ofRandom(0, 4)];
+        b->addIngredient(randIngre);
+    }
+    // b->addIngredient(burger);
+    // b->addIngredient(cheese);
+    // b->addIngredient(tomato);
+    // b->addIngredient(lettuce);
     b->addIngredient(topBread);
     entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(8)], b));
 }
 void Restaurant::render()
 {
     floor.draw(0, 0, ofGetWidth(), ofGetHeight());
+    ofSetColor(ofColor::white);
+    // seats.draw(ofGetWidth()/4, ofGetHeight()/4);
+    // seats.draw(ofGetWidth()/4, (ofGetHeight()/4) * 2);
+    // seats.draw(ofGetWidth()/4 * 2, ofGetHeight()/4);
+    // seats.draw(ofGetWidth()/4 * 2, (ofGetHeight()/4) * 2);
+
+    eating.draw(ofGetWidth()/4 , (ofGetHeight()/6) - 50 );
+    eating.draw(ofGetWidth()/4 , (ofGetHeight()/6) * 2 );
+    eating.draw(ofGetWidth()/4 * 2, (ofGetHeight()/6) - 50 );
+    eating.draw(ofGetWidth()/4 * 2, (ofGetHeight()/6) * 2 );
+
+    boat.draw(ofGetWidth() - boat.getWidth(), (ofGetHeight()/3) );
+
+    jellyFish.draw(ofGetWidth() - jellyFish.getWidth(), (ofGetHeight()/8) );
+    
     player->render();
     entityManager->render();
-    ofSetColor(0, 100, 0);
+    ofSetColor(255, 255, 255);
     ofDrawBitmapString("Money: " + to_string(money), ofGetWidth() / 2, 10);
     ofSetColor(256, 256, 256);
 }
