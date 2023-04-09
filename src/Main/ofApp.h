@@ -16,7 +16,7 @@ private:
 	WinState *winState;
 	LoseState *loseState;
 
-	ofSoundPlayer sound;
+	// ofSoundPlayer sound;
 
 public:
 	void setup();

@@ -12,9 +12,9 @@ void ofApp::setup()
 	currentState = menuState;
 
 	// Sound
-	sound.load("music.wav");
-	sound.setLoop(true);
-	sound.play();
+	// sound.load("music.wav");
+	// sound.setLoop(true);
+	// sound.play();
 }
 
 //--------------------------------------------------------------

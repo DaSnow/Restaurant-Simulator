@@ -3,6 +3,7 @@
 //
 
 #include "Restaurant.h"
+#include "EntityManager.h"
 
 Player *Restaurant::getPlayer() { return player; }
 void Restaurant::setPlayer(Player *player) { this->player = player; }
@@ -178,6 +179,9 @@ void Restaurant::render()
 void Restaurant::serveClient()
 {
     money += entityManager->firstClient->serve(player->getBurger());
+    if (entityManager->firstClient->patience == 0){
+        money /= 2;
+    }
     if (money == 100)
     {
         win = true;
