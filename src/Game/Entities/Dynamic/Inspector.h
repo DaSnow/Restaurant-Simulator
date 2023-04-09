@@ -1,8 +1,9 @@
-// #pragma once
-// #include "Client.h"
+#pragma once
+#include "Client.h"
+// #include "Entity.h"
 
 
-// class Inspector : public Client {
+class Inspector : public Client {
 // private:
 //     float originalPatience = 2000;
 // public:
@@ -16,4 +17,4 @@
 //     int payment();
 //     Inspector *nextClient = nullptr;
 //     bool InspectorIsLeaving = false;
-// };
+};

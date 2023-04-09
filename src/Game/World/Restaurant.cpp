@@ -99,26 +99,61 @@ void Restaurant::initCounters()
 void Restaurant::initClients()
 {
     ofImage temp;
-    temp.load("images/People/Car_Designer3Female.png");
+    // temp.load("images/People/Car_Designer3Female.png");
+    // people.push_back(temp);
+    // temp.load("images/People/Freedom_Fighter2Male.png");
+    // people.push_back(temp);
+    // temp.load("images/People/Hipster.png");
+    // people.push_back(temp);
+    // temp.load("images/People/Lawyer2Male.png");
+    // people.push_back(temp);
+    // temp.load("images/People/Mad_Scientist3Female.png");
+    // people.push_back(temp);
+    // temp.load("images/People/Programmer2Male.png");
+    // people.push_back(temp);
+    // temp.load("images/People/Songwriter3Male.png");
+    // people.push_back(temp);
+    // temp.load("images/People/Weather_Reporter2Female.png");
+    // // temp.reazize
+    // people.push_back(temp);
+
+    // // ANADIR A LA ULTIMA POSICION DEL VECTOR (PEOPLE) EL INSPECTOR
+    // temp.load("images/People/Inspector.png");
+    // people.push_back(temp);
+
+
+
+
+
+    temp.load("images/People/Squidward.PNG");
     people.push_back(temp);
-    temp.load("images/People/Freedom_Fighter2Male.png");
+    temp.load("images/People/Sandy.png");
     people.push_back(temp);
-    temp.load("images/People/Hipster.png");
+    temp.load("images/People/Pluff.PNG");
     people.push_back(temp);
-    temp.load("images/People/Lawyer2Male.png");
+    temp.load("images/People/Pearl.png");
     people.push_back(temp);
-    temp.load("images/People/Mad_Scientist3Female.png");
+    temp.load("images/People/Patrick.png");
     people.push_back(temp);
-    temp.load("images/People/Programmer2Male.png");
+    temp.load("images/People/Larry.png");
     people.push_back(temp);
-    temp.load("images/People/Songwriter3Male.png");
+    temp.load("images/People/Krabs.PNG");
     people.push_back(temp);
-    temp.load("images/People/Weather_Reporter2Female.png");
+    temp.load("images/People/Gary.PNG");
+    // temp.reazize
     people.push_back(temp);
+
+    // ANADIR A LA ULTIMA POSICION DEL VECTOR (PEOPLE) EL INSPECTOR
+    temp.load("images/People/Inspector.png");
+    people.push_back(temp);
+
 }
 void Restaurant::tick()
 {
     ticks++;
+    if (entityManager->firstClient->patience == 1 ){
+        money /= 2;
+    }
     if (ticks % 400 == 0)
     {
         generateClient();
@@ -150,7 +185,15 @@ void Restaurant::generateClient()
     // b->addIngredient(tomato);
     // b->addIngredient(lettuce);
     b->addIngredient(topBread);
-    entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(8)], b));
+    // int RandomClient = ofRandom(0,9);
+    // if (RandomClient != 9){
+    //     entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(RandomClient)], b));
+    // } else {
+    //     entityManager->addClient(new Inspector(0, 50, 64, 72, people[ofRandom(RandomClient)], b));
+    // }
+
+
+    entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(9)], b));
 }
 void Restaurant::render()
 {
@@ -179,9 +222,7 @@ void Restaurant::render()
 void Restaurant::serveClient()
 {
     money += entityManager->firstClient->serve(player->getBurger());
-    if (entityManager->firstClient->patience == 0){
-        money /= 2;
-    }
+    
     if (money == 100)
     {
         win = true;

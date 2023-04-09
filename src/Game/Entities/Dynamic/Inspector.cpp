@@ -2,9 +2,9 @@
 
 // Inspector::Inspector(int x, int y, int width, int height, ofImage sprite, Burger *burger) : Entity(x, y, width, height, sprite)
 // {
-//     this->burger = burger;
+//     // this->burger = burger;
 // }
-// Inspector::~Inspector()
+// Inspector::~Client()
 // {
 //     delete burger;
 // }
