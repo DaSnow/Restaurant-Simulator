@@ -4,17 +4,19 @@
 
 
 class Inspector : public Client {
-// private:
-//     float originalPatience = 2000;
-// public:
-//     Burger *burger;
-//     int patience = 2000;
-//     Inspector(int, int, int, int, ofImage, Burger *);
-//     virtual ~Inspector();
-//     void tick();
-//     void render();
-//     int serve(Burger *);
-//     int payment();
-//     Inspector *nextClient = nullptr;
-//     bool InspectorIsLeaving = false;
+private:
+    // float originalPatience = 2000;
+public:
+    Inspector(int x, int y, int width, int height, ofImage sprite, Burger *burger) :
+    Client (x, y, width, height, sprite, burger) {}
+    // Burger *burger;
+    // int patience = 2000;
+    // Inspector(int, int, int, int, ofImage, Burger *);
+    // virtual ~Inspector();
+    // void tick();
+    // void render();
+    // int serve(Burger *);
+    // int payment();
+    // Inspector *nextClient = nullptr;
+    // bool InspectorIsLeaving = false;
 };

@@ -4,6 +4,7 @@
 
 #include "Restaurant.h"
 #include "EntityManager.h"
+#include "Inspector.h"
 
 Player *Restaurant::getPlayer() { return player; }
 void Restaurant::setPlayer(Player *player) { this->player = player; }
@@ -151,9 +152,12 @@ void Restaurant::initClients()
 void Restaurant::tick()
 {
     ticks++;
-    if (entityManager->firstClient->patience == 1 ){
+    if (entityManager->InspectorDisappointment != entityManager->LastInspectorDisappointment){
         money /= 2;
+        entityManager->LastInspectorDisappointment;
+        } 
     }
+    
     if (ticks % 400 == 0)
     {
         generateClient();
@@ -185,15 +189,16 @@ void Restaurant::generateClient()
     // b->addIngredient(tomato);
     // b->addIngredient(lettuce);
     b->addIngredient(topBread);
-    // int RandomClient = ofRandom(0,9);
-    // if (RandomClient != 9){
-    //     entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(RandomClient)], b));
-    // } else {
-    //     entityManager->addClient(new Inspector(0, 50, 64, 72, people[ofRandom(RandomClient)], b));
-    // }
+
+    int RandomClient = ofRandom(0,9);
+    if (RandomClient != 8){
+        entityManager->addClient(new Client(0, 50, 64, 72, people[RandomClient], b));
+    } else {
+        entityManager->addClient(new Inspector(0, 50, 64, 72, people[RandomClient], b));
+    }
 
 
-    entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(9)], b));
+    // entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(9)], b));
 }
 void Restaurant::render()
 {

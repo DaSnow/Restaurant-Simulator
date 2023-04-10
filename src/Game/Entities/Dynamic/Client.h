@@ -1,3 +1,4 @@
+#pragma once
 #include "Entity.h"
 #include "Burger.h"
 
@@ -17,4 +18,5 @@ public:
     int payment();
     Client *nextClient = nullptr;
     bool isLeaving = false;
+    int getPatience() { return patience; }
 };

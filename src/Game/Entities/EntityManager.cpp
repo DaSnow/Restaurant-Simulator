@@ -23,6 +23,8 @@ void EntityManager::removeLeavingClients()
     {
         if (tempClient->isLeaving)
         {
+            if (dynamic_cast<Inspector*>(tempClient) != NULL && tempClient->patience == 0)
+                InspectorDisappointment += 1;
             if (tempClient->patience == 0)
                 Disappointment++;
             if (prevClient == nullptr)
