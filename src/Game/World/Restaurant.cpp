@@ -71,7 +71,7 @@ void Restaurant::initItems()
 
     burger = new Item(burgerImg, "patty");
     RandomItem.push_back(burger);
-    
+
     botBread = new Item(botBreadImg, "bottomBun");
     topBread = new Item(topBreadImg, "topBun");
 }
@@ -122,10 +122,6 @@ void Restaurant::initClients()
     // temp.load("images/People/Inspector.png");
     // people.push_back(temp);
 
-
-
-
-
     temp.load("images/People/Squidward.PNG");
     people.push_back(temp);
     temp.load("images/People/Sandy.png");
@@ -147,21 +143,20 @@ void Restaurant::initClients()
     // ANADIR A LA ULTIMA POSICION DEL VECTOR (PEOPLE) EL INSPECTOR
     temp.load("images/People/Inspector.png");
     people.push_back(temp);
-
 }
 void Restaurant::tick()
 {
     ticks++;
-    if (entityManager->InspectorDisappointment != entityManager->LastInspectorDisappointment){
+    if (entityManager->InspectorDisappointment != entityManager->LastInspectorDisappointment)
+    {
         money /= 2;
-        entityManager->LastInspectorDisappointment;
-        } 
+        entityManager->LastInspectorDisappointment = entityManager->InspectorDisappointment;
     }
-    
+
     if (ticks % 400 == 0)
     {
         generateClient();
-        //eatingg->tick();
+        // eatingg->tick();
     }
     player->tick();
     entityManager->tick();
@@ -173,30 +168,28 @@ void Restaurant::tick()
 
 void Restaurant::generateClient()
 {
-    
 
     Burger *b = new Burger(72, 100, 50, 25);
     b->addIngredient(botBread);
 
     int limit = ofRandom(1, 4);
     Item *randIngre;
-    for(int i = 0; i < limit; i++){
+    for (int i = 0; i < limit; i++)
+    {
         randIngre = RandomItem[ofRandom(0, 4)];
         b->addIngredient(randIngre);
     }
-    // b->addIngredient(burger);
-    // b->addIngredient(cheese);
-    // b->addIngredient(tomato);
-    // b->addIngredient(lettuce);
     b->addIngredient(topBread);
 
-    int RandomClient = ofRandom(0,9);
-    if (RandomClient != 8){
+    int RandomClient = ofRandom(0, 9);
+    if (RandomClient != 8)
+    {
         entityManager->addClient(new Client(0, 50, 64, 72, people[RandomClient], b));
-    } else {
+    }
+    else
+    {
         entityManager->addClient(new Inspector(0, 50, 64, 72, people[RandomClient], b));
     }
-
 
     // entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(9)], b));
 }
@@ -209,15 +202,15 @@ void Restaurant::render()
     // seats.draw(ofGetWidth()/4 * 2, ofGetHeight()/4);
     // seats.draw(ofGetWidth()/4 * 2, (ofGetHeight()/4) * 2);
 
-    eating.draw(ofGetWidth()/4 , (ofGetHeight()/6) - 50 );
-    eating.draw(ofGetWidth()/4 , (ofGetHeight()/6) * 2 );
-    eating.draw(ofGetWidth()/4 * 2, (ofGetHeight()/6) - 50 );
-    eating.draw(ofGetWidth()/4 * 2, (ofGetHeight()/6) * 2 );
+    eating.draw(ofGetWidth() / 4, (ofGetHeight() / 6) - 50);
+    eating.draw(ofGetWidth() / 4, (ofGetHeight() / 6) * 2);
+    eating.draw(ofGetWidth() / 4 * 2, (ofGetHeight() / 6) - 50);
+    eating.draw(ofGetWidth() / 4 * 2, (ofGetHeight() / 6) * 2);
 
-    boat.draw(ofGetWidth() - boat.getWidth(), (ofGetHeight()/3) );
+    boat.draw(ofGetWidth() - boat.getWidth(), (ofGetHeight() / 3));
 
-    jellyFish.draw(ofGetWidth() - jellyFish.getWidth(), (ofGetHeight()/8) );
-    
+    jellyFish.draw(ofGetWidth() - jellyFish.getWidth(), (ofGetHeight() / 8));
+
     player->render();
     entityManager->render();
     ofSetColor(255, 255, 255);
@@ -227,7 +220,7 @@ void Restaurant::render()
 void Restaurant::serveClient()
 {
     money += entityManager->firstClient->serve(player->getBurger());
-    
+
     if (money == 100)
     {
         win = true;
