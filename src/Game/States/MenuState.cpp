@@ -4,7 +4,7 @@ MenuState::MenuState() {
 	string text = "Start";
 	startButton = new Button(ofGetWidth()/2 - 20, ofGetHeight()/2 + 20, 64, 50, "Start");
 	// startButton = new Button(ofGetWidth()/2 - text.length()*8, ofGetHeight()/2 - text.length()*11, 64, 50, "Start");
-	instuctionButton = new Button(ofGetWidth()/6 - text.length()*8, ofGetHeight()/4 + ( (ofGetHeight()/4) * 2) - text.length()*11, 64, 50, "HELOOOOOOOOOOO");
+	instuctionButton = new Button(ofGetWidth()/6 - 100, ofGetHeight()/4 + ( (ofGetHeight()/4) * 2) - 150, 300, 200, "    ");
 	img1.load("images/Krusty_Burger.png");
 	imgText.load("images/textcopy.png");
 }
@@ -13,7 +13,7 @@ void MenuState::tick() {
 	instuctionButton->tick();
 	if(instuctionButton->wasPressed()){
 		instuctions = true;
-		render();
+		// render();
 	} else if(instuctions && startButton->wasPressed()){
 		setNextState("Game");
 		setFinished(true);
