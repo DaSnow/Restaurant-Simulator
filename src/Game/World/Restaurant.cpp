@@ -143,14 +143,14 @@ void Restaurant::generateClient()
     }
     b->addIngredient(topBread);
 
-    int RandomClient = ofRandom(0, 9);
-    if (RandomClient != 8)
-    {
-        entityManager->addClient(new Client(0, 50, 64, 72, people[RandomClient], b));
-    }
-    else
-    {
-        entityManager->addClient(new Inspector(0, 50, 64, 72, people[RandomClient], b));
+    // int RandomClient = ofRandom(0, 9);
+    if (count != 10) {
+        count += 1;
+        entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(0,8)], b));
+        
+    } else {
+        entityManager->addClient(new Inspector(0, 50, 64, 72, people[8], b));
+        count = 1;
     }
 }
 void Restaurant::render()
