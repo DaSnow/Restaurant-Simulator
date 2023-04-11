@@ -4,6 +4,7 @@
 class WinState : public State
 {
 public:
+    ofImage imgWin;
     WinState();
     void reset();
     void tick();

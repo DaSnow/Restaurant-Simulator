@@ -4,6 +4,7 @@
 class LoseState : public State
 {
 public:
+    ofImage imgLose;
     LoseState();
     void reset();
     void tick();

@@ -2,10 +2,13 @@
 #include "WinState.h"
 
 WinState::WinState() {
+	imgWin.load("images/WinState.JPG");
 }
 void WinState::tick() {
 }
 void WinState::render() {
+	ofSetColor(ofColor::white);
+	imgWin.draw(0, 0, ofGetWidth(), ofGetHeight());
 	string text = "Won";
 	ofSetColor(0,0,0);
 	ofDrawBitmapString(text, ofGetWidth() / 2, ofGetHeight() / 2);
