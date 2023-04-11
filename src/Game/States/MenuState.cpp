@@ -2,7 +2,7 @@
 
 MenuState::MenuState() {
 	string text = "Start";
-	startButton = new Button(ofGetWidth()/2 - 20, ofGetHeight()/2 + 20, 64, 50, "Start");
+	startButton = new Button(ofGetWidth()/2 - 20, ofGetHeight()/2 + 20, 300, 200, "Start");
 	// startButton = new Button(ofGetWidth()/2 - text.length()*8, ofGetHeight()/2 - text.length()*11, 64, 50, "Start");
 	instuctionButton = new Button(ofGetWidth()/6 - text.length()*8, ofGetHeight()/4 + ( (ofGetHeight()/4) * 2) - text.length()*11, 64, 50, "HELOOOOOOOOOOO");
 	img1.load("images/Krusty_Burger.png");

@@ -5,7 +5,7 @@ class StoveCounter : public BaseCounter
 {
 private:
     // Item *item;
-    int cookCount = 0;
+    int cookCount = 0; // counter to know when it is fully cooked
 public:
     int r = 255;
     int g = 255;

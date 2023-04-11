@@ -9,7 +9,7 @@ class Player : public Entity
 
 private:
     int speed = 0;
-    int cookCount = 0;
+    int cookCount = 0; // counter to call cookBurger() function each frame under the right condition
     bool cook = false;
     string facing = "right";
     Animation *chefAnim;
