@@ -9,7 +9,7 @@
 
 class BaseCounter : public Entity
 {
-private:
+protected:
     Item *item;
 
 public:

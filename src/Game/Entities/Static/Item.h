@@ -11,4 +11,5 @@ public:
     Item(ofImage, string);
     ofImage sprite;
     string name;
+    bool cooked = false;
 };

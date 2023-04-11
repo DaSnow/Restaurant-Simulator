@@ -14,7 +14,7 @@ private:
     EntityManager *entityManager;
     int ticks = 0;
     std::vector<ofImage> people;
-    int money = 0;
+    int money = 10;
     std::vector<ofImage> eatingg;
 
 public:
