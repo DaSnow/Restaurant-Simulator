@@ -46,17 +46,19 @@ bool Burger::equals(Burger *borgar)
         return false;
     if (borgar->ingredients[borgar->ingredients.size() - 1]->name != "topBun")
         return false;
-    for (int i = 1; i < ingredients.size() - 1; i++)
+    for (unsigned int i = 1; i < ingredients.size() - 1; i++)
     {
         bool exist = false;
         int count = 0;
-        for (int z = 1; z < borgar->ingredients.size() - 1; z++)
+        for (unsigned int z = 1; z < borgar->ingredients.size() - 1; z++)
         {
             if (borgar->ingredients[z]->name == ingredients[i]->name)
             {
                 exist = true;
                 count++;
             }
+            if (borgar->ingredients[z]->name == "bottomBun" || borgar->ingredients[z]->name == "topBun")
+                return false;
         }
         if (!exist || count != borgar->chosenIngredients[ingredients[i]->name])
             return false;

@@ -3,13 +3,17 @@
 #include "Burger.h"
 #include "EntityManager.h"
 #include "BaseCounter.h"
+#include "StoveCounter.h"
 class Player : public Entity
 {
 
 private:
     int speed = 0;
+    int cookCount = 0;
+    bool cook = false;
     string facing = "right";
     Animation *chefAnim;
+    StoveCounter *stove;
     EntityManager *entityManager;
 
 public:

@@ -5,14 +5,6 @@ Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManage
     vector<ofImage> chefAnimframes;
     ofImage temp;
     this->burger = new Burger(ofGetWidth() - 110, 100, 100, 50);
-    // temp.cropFrom(sprite, 30, 3, 66, 120);
-    // chefAnimframes.push_back(temp);
-    // temp.cropFrom(sprite, 159, 3, 66, 120);
-    // chefAnimframes.push_back(temp);
-    // temp.cropFrom(sprite, 287, 3, 67, 120);
-    // chefAnimframes.push_back(temp);
-    // temp.cropFrom(sprite, 31, 129, 66, 120);
-    // chefAnimframes.push_back(temp);
 
     temp.cropFrom(sprite, 0, 0, 33, 42);
     chefAnimframes.push_back(temp);
@@ -29,6 +21,12 @@ Player::Player(int x, int y, int width, int height, ofImage sprite, EntityManage
 void Player::tick()
 {
 
+    if (cook && cookCount <= 20)
+    {
+        cookCount += 1;
+        stove->cookBurger();
+        ofSetColor(256, 256, 256);
+    }
     chefAnim->tick();
     if (facing == "left")
     {
@@ -53,6 +51,11 @@ void Player::render()
     BaseCounter *ac = getActiveCounter();
     if (ac != nullptr)
     {
+        StoveCounter *ad = dynamic_cast<StoveCounter *>(ac);
+        if (ad != nullptr)
+        {
+            ad->showItemth();
+        }
         ac->showItem();
     }
     ofSetColor(256, 256, 256);
@@ -72,10 +75,32 @@ void Player::keyPressed(int key)
         BaseCounter *ac = getActiveCounter();
         if (ac != nullptr)
         {
-            Item *item = ac->getItem();
-            if (item != nullptr)
+            StoveCounter *ad = dynamic_cast<StoveCounter *>(ac);
+            if (ad != nullptr)
             {
-                burger->addIngredient(item);
+                stove = ad;
+                if (stove->getItem()->cooked) // resets variables for next patty
+                {
+                    cookCount = 0;
+                    burger->addIngredient(stove->getItem());
+                    stove->getItem()->cooked = false;
+                    cook = false;
+                    stove->r = 255;
+                    stove->g = 255;
+                    stove->b = 255;
+                }
+                else
+                {
+                    cook = true;
+                }
+            }
+            else
+            {
+                Item *item = ac->getItem();
+                if (item != nullptr)
+                {
+                    burger->addIngredient(item);
+                }
             }
         }
     }

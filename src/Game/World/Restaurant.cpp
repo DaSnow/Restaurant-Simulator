@@ -21,32 +21,16 @@ Restaurant::Restaurant()
     eating.resize(150, 200);
     eatingg.push_back(eating);
 
-    // eating.load("images/eating_gif/2.png");
-    // eating.resize(150, 200);
-    // eatingg.push_back(eating);
-
-    // eating.load("images/eating_gif/3.png");
-    // eating.resize(150, 200);
-    // eatingg.push_back(eating);
-
-    // eating.load("images/eating_gif/4.png");
-    // eating.resize(150, 200);
-    // eatingg.push_back(eating);
-
-    // eating.load("images/eating_gif/5.png");
-    // eating.resize(150, 200);
-    // eatingg.push_back(eating);
-
     boat.load("images/boat.png");
     boat.resize(150, 125);
     jellyFish.load("images/jellyFish.png");
     jellyFish.resize(65, 70);
     chefPlayerImage.load("images/moving.PNG");
-    this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager);
     initItems();
     initCounters();
     initClients();
     generateClient();
+    this->player = new Player(0, 600, 64, 64, chefPlayerImage, entityManager);
 }
 void Restaurant::initItems()
 {
@@ -90,7 +74,7 @@ void Restaurant::initCounters()
     breadCounterImg.cropFrom(counterSheet, 0, 63, 34, 56);    // buns
     entityManager->addEntity(new BaseCounter(0, yOffset - 16, counterWidth, 117, nullptr, plateCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth, yOffset - 7, counterWidth, 108, cheese, cheeseCounterImg));
-    entityManager->addEntity(new BaseCounter(counterWidth * 2, yOffset, counterWidth, 102, burger, stoveCounterImg));
+    entityManager->addEntity(new StoveCounter(counterWidth * 2, yOffset, counterWidth, 102, burger, stoveCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth * 3, yOffset, counterWidth, 102, lettuce, lettuceCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth * 4, yOffset, counterWidth, 102, nullptr, emptyCounterImg));
     entityManager->addEntity(new BaseCounter(counterWidth * 5, yOffset - 10, counterWidth, 113, tomato, tomatoCounterImg));
@@ -100,27 +84,6 @@ void Restaurant::initCounters()
 void Restaurant::initClients()
 {
     ofImage temp;
-    // temp.load("images/People/Car_Designer3Female.png");
-    // people.push_back(temp);
-    // temp.load("images/People/Freedom_Fighter2Male.png");
-    // people.push_back(temp);
-    // temp.load("images/People/Hipster.png");
-    // people.push_back(temp);
-    // temp.load("images/People/Lawyer2Male.png");
-    // people.push_back(temp);
-    // temp.load("images/People/Mad_Scientist3Female.png");
-    // people.push_back(temp);
-    // temp.load("images/People/Programmer2Male.png");
-    // people.push_back(temp);
-    // temp.load("images/People/Songwriter3Male.png");
-    // people.push_back(temp);
-    // temp.load("images/People/Weather_Reporter2Female.png");
-    // // temp.reazize
-    // people.push_back(temp);
-
-    // // ANADIR A LA ULTIMA POSICION DEL VECTOR (PEOPLE) EL INSPECTOR
-    // temp.load("images/People/Inspector.png");
-    // people.push_back(temp);
 
     temp.load("images/People/Squidward.PNG");
     people.push_back(temp);
@@ -137,7 +100,6 @@ void Restaurant::initClients()
     temp.load("images/People/Krabs.PNG");
     people.push_back(temp);
     temp.load("images/People/Gary.PNG");
-    // temp.reazize
     people.push_back(temp);
 
     // ANADIR A LA ULTIMA POSICION DEL VECTOR (PEOPLE) EL INSPECTOR
@@ -160,7 +122,7 @@ void Restaurant::tick()
     }
     player->tick();
     entityManager->tick();
-    if (entityManager->Disappointment == 10)
+    if (entityManager->Disappointment >= 10)
     {
         lose = true;
     }
@@ -190,17 +152,11 @@ void Restaurant::generateClient()
     {
         entityManager->addClient(new Inspector(0, 50, 64, 72, people[RandomClient], b));
     }
-
-    // entityManager->addClient(new Client(0, 50, 64, 72, people[ofRandom(9)], b));
 }
 void Restaurant::render()
 {
     floor.draw(0, 0, ofGetWidth(), ofGetHeight());
     ofSetColor(ofColor::white);
-    // seats.draw(ofGetWidth()/4, ofGetHeight()/4);
-    // seats.draw(ofGetWidth()/4, (ofGetHeight()/4) * 2);
-    // seats.draw(ofGetWidth()/4 * 2, ofGetHeight()/4);
-    // seats.draw(ofGetWidth()/4 * 2, (ofGetHeight()/4) * 2);
 
     eating.draw(ofGetWidth() / 4, (ofGetHeight() / 6) - 50);
     eating.draw(ofGetWidth() / 4, (ofGetHeight() / 6) * 2);
@@ -221,7 +177,7 @@ void Restaurant::serveClient()
 {
     money += entityManager->firstClient->serve(player->getBurger());
 
-    if (money == 100)
+    if (money >= 100)
     {
         win = true;
     }
@@ -229,8 +185,8 @@ void Restaurant::serveClient()
 void Restaurant::keyPressed(int key)
 {
     player->keyPressed(key);
-    if (key == 'e') // Removes money per ingredients
-        money -= 1;
+    if (key == 'e') // Removes money per ingredients if greater than 0
+        money -= (money > 0) ? 1 : 0;
     if (key == 's' && player->burger->ingredients.size() > 0)
     {
         serveClient();

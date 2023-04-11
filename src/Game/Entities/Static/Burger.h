@@ -13,7 +13,7 @@ private:
 
 public:
   vector<Item *> ingredients;
-  map<string, int> chosenIngredients = {
+  map<string, int> chosenIngredients = { // Thought using a dictionary would be easier instead of 4 different variables
       {"patty", 0},
       {"tomato", 0},
       {"lettuce", 0},
