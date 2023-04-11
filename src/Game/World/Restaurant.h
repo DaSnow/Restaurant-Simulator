@@ -42,4 +42,5 @@ public:
     void render();
     void keyPressed(int key);
     void keyReleased(int key);
+    int count = 1; 
 };
